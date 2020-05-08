@@ -39,7 +39,7 @@ control_biomass_DN <- reduced_npp %>%
   subset(ANPP == "Yes" )%>%
   ddply( c("site_code", "year", "plot", "subplot"),
          function(x)data.frame(
-           biomass = mean(x$mass)
+           biomass = sum(x$mass)
          )) %>%
   ddply( c("site_code", "year", "plot"),
          function(x)data.frame(
@@ -86,7 +86,7 @@ control_biomass_NN <- full.biomass %>%
   #block, plot, subplot
   ddply( c("site_code", "year", "plot", "subplot"),
          function(x)data.frame(
-           biomass = mean(x$mass)
+           biomass = sum(x$mass)
          )) %>%
   ddply( c("site_code", "year", "plot"),
          function(x)data.frame(
@@ -159,7 +159,7 @@ annual_control_DN <- reduced_npp %>%
   subset(ANPP == "Yes")%>%
   ddply( c("site_code", "year", "plot", "subplot", "ppt"),
          function(x)data.frame(
-           biomass = mean(x$mass)
+           biomass = sum(x$mass)
          )) %>%
   ddply( c("site_code", "year", "plot", "ppt"),
          function(x)data.frame(
@@ -187,7 +187,7 @@ annual_control_NN <- full.biomass %>%
   #block, plot, subplot
   ddply( c("site_code", "year", "plot", "subplot"),
          function(x)data.frame(
-           biomass = mean(x$mass)
+           biomass = sum(x$mass)
          )) %>%
   ddply( c("site_code", "year", "plot"),
          function(x)data.frame(
