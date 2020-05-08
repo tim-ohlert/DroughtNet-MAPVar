@@ -1,0 +1,1 @@
+# DroughtNet-MAPVar
