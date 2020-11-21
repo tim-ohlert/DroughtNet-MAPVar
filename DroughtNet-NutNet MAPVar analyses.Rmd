@@ -2,7 +2,9 @@
 title: "DroughtNet-NutNet MAPVar analyses"
 author: "Tim Ohlert"
 date: "11/20/2020"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -387,38 +389,6 @@ ggplot(arid_sites, aes(d.var, biomass))+
   ggtitle("1000+ mm")+
   theme_cowplot()
 ```
-
-
-
-## somthing about segmented/breakpoints
-
-```{r}
-# have to provide estimates for breakpoints.
-# after looking a the data, 
-my.seg <- segmented(map, 
-                    seg.Z = ~ MAP,
-                    psi = list(MAP = c(400, 700)))
-
-# When not providing estimates for the breakpoints "psi = NA" can be used.
-# The number of breakpoints that will show up is not defined
-#my.seg <- segmented(my.lm, 
-#                    seg.Z = ~ DistanceMeters, 
-#                    psi = NA)
-
-# display the summary
-summary(my.seg)
-
-my.fitted <- fitted(my.seg)
-
-```
-
-
-
-
-
-
-
-
 
 
 
