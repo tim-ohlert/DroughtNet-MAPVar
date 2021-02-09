@@ -46,7 +46,7 @@ d.fun <- function (var, k=0){
 ## Load and format climate data for both NutNet and DroughtNet
 
 ```{r}
-CRU <- read.csv("C:/Users/ohler/Dropbox/Tim Work/NN_DN-CRU-1961-2019.csv")
+CRU <- read.csv("C:/Users/ohler/Dropbox/Tim Work/DroughtNet/NN_DN-CRU-1961-2019.csv")
 CRU <- ddply(CRU, .(site_code, year),
              function(x)data.frame(
                ppt = sum(x$ppt)
@@ -118,7 +118,7 @@ control_biomass_DN$network <- "DroughtNet"
 ## Format NutNet biomass data
 
 ```{r}
-full.biomass <- read.csv("C:/Users/ohler/Dropbox/NutNet data/full-biomass-24-September-2020.csv")
+full.biomass <- read.csv("C:/Users/ohler/Dropbox/NutNet data/full-biomass-07-December-2020.csv")
 
 
 control_biomass_NN <- full.biomass %>%
@@ -204,7 +204,7 @@ summary(map.d.2)
 ggplot(dn_nn, aes(x=MAP, y=biomass))+
   geom_smooth(method="lm",formula= (y ~ x + I(x^2)),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
   geom_point(aes(size=d.var, colour=network),shape=19)+
-  xlim(c(0,3000))+
+  xlim(c(0,2000))+
   ylab("ANPP (g/m2)")+
   theme_cowplot()
 ```
@@ -334,7 +334,7 @@ visreg(d_map.3, ylab="variability (D)")
 ggplot(dn_nn, aes(x=MAP, y=d.var))+
   geom_smooth(method="lm",formula= (y ~ x + I(x^2)),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
   geom_point(aes(colour=network),shape=19, size=3)+
-  xlim(c(0,2500))+
+  xlim(c(0,1500))+
   ylab("Variability")+
   theme_cowplot()
 
@@ -383,16 +383,44 @@ map.d <- lm(biomass~MAP * d.var, data=arid_sites)
 ggplot(arid_sites, aes(d.var, biomass))+
   geom_smooth(method="lm",formula= (y ~ x),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
   geom_point(aes(colour=network),shape=19, size=3)+
-  #xlim(c(0,2500))+
   ylab("ANPP (g/m2)")+
   xlab("variability")+
-  ggtitle("1000+ mm")+
+  ggtitle("<400 mm")+
   theme_cowplot()
 ```
 
 
 
+```{r}
+ggplot(mid_sites, aes(d.var, biomass))+
+  geom_smooth(method="lm",formula= (y ~ x),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
+  geom_point(aes(colour=network),shape=19, size=3)+
+  ylab("ANPP (g/m2)")+
+  xlab("variability")+
+  ggtitle("400-700 mm")+
+  theme_cowplot()
+```
+
+```{r}
+ggplot(mesic_sites, aes(d.var, biomass))+
+  geom_smooth(method="lm",formula= (y ~ x),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
+  geom_point(aes(colour=network),shape=19, size=3)+
+  ylab("ANPP (g/m2)")+
+  xlab("variability")+
+  ggtitle("700-1000 mm")+
+  theme_cowplot()
+```
 
 
+
+```{r}
+ggplot(super_mesic_sites, aes(d.var, biomass))+
+  geom_smooth(method="lm",formula= (y ~ x),se=T,col="black",size=2,fill = "dodgerblue", alpha=.2)+
+  geom_point(aes(colour=network),shape=19, size=3)+
+  ylab("ANPP (g/m2)")+
+  xlab("variability")+
+  ggtitle("1000+ mm")+
+  theme_cowplot()
+```
 
 
